@@ -1,4 +1,4 @@
-# table_formatters/compositetableformatter.py
+# formatters/compositetableformatter.py
 
 from ..tableformatter import TableFormatter
 

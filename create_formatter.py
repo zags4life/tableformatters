@@ -6,9 +6,9 @@ from .register_formatter import FORMATTER_LOOKUP
 from .formatters.compositetableformatter import CompositeTableFormatter
 
 def create_formatter(formatter, **kwargs):
-    formatter = FORMATTER_LOOKUP.get(formatter.lower())
-    assert formatter, "Unknown formatter type '{}'".format(formatter)
-    return formatter(**kwargs)
+    formatter_cls = FORMATTER_LOOKUP.get(formatter.lower())
+    assert formatter_cls, "Unknown formatter type '{}'".format(formatter)
+    return formatter_cls(**kwargs)
 
 def create_formatters(formatters, **kwargs):
     if not formatters:

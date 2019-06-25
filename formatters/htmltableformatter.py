@@ -3,8 +3,6 @@
 from ..register_formatter import register_formatter
 from ..tableformatter import StringTableFormatter
 
-from utils import memoized
-
 @register_formatter('html')
 class HtmlTableFormatter(StringTableFormatter):
     def __init__(self, class_name=None, id=None, **kwargs):

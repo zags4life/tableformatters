@@ -6,6 +6,7 @@ from ..register_formatter import register_formatter
 from ..tableformatter import TableFormatter
 
 @register_formatter('logger')
+@register_formatter('logging')
 class LoggerTableFormatter(TableFormatter):
     def __init__(self, logger, log_level, **kwargs):
         super().__init__(**kwargs)

@@ -2,8 +2,8 @@
 
 import logging
 
-from .compositetableformatter import CompositeTableFormatter
-from .create_formatter import create_formatter
+from .formatters.compositetableformatter import CompositeTableFormatter
+from .create_formatter import create_formatters
 from .tabledataprovider import TableFormatterDataProvider
 
 def main():
@@ -28,16 +28,13 @@ def main():
 
     logger = logging.getLogger('LoggerTableFormatter')
 
-    info_formatter = create_formatter(
-        formatter_type='csv',
-        logger=logger,
-        log_level='info',
+    formatter = create_formatters(
+        formatters='logging;csv',
+        logger=logging.getLogger('LoggerTableFormatter'),
+        log_level=logging.DEBUG,
         filename='foo.csv',
         column_widths=('12<', '50<', '12<', '12<', '12<')
     )
-
-    formatter = CompositeTableFormatter()
-    formatter.add_formatter(info_formatter)
 
     persons = [
         Person('Mike Smith', '123 Fake St', '3125551212'),
