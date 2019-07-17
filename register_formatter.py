@@ -14,3 +14,6 @@ def register_formatter(name):
         FORMATTER_LOOKUP[name] = func
         return func
     return decorator
+    
+def get_formatter_names():
+    return sorted(list(FORMATTER_LOOKUP.keys()))

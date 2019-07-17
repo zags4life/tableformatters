@@ -50,7 +50,7 @@ that will output the table using the python logger.
 
     from formatters import TableFormatter, register_formatter
 
-    @register_formatter('logger') # add doc
+    @register_formatter('logger') 
     class LoggerTableFormatter(TableFormatter):
         def __init__(self, logger, **kwargs):
             super().__init__(**kwargs)
@@ -96,34 +96,34 @@ Putting It All Together:
 
 
 Column Width Mini-Language
-        Column widths are defined as strings in the format
-            '<prefix><padding><alignment><suffix>'
+    Column widths are defined as strings in the format
+        '<prefix><padding><alignment><suffix>'
 
-        prefix: The value to prefix to each message
-        padding: The width of the column in Format Specification Mini-Language.
+    prefix: The value to prefix to each message
+    padding: The width of the column in Format Specification Mini-Language.
+        https://docs.python.org/3/library/string.html#formatspec
+
+        Examples:
+            width=12
+            -- or --
+            width='11,.2f'
+    alignment: Specifies the column alignment.
+        See Formating Specification Mini-Language for more information
             https://docs.python.org/3/library/string.html#formatspec
 
-            Examples:
-                width=12
-                -- or --
-                width='11,.2f'
-        alignment: Specifies the column alignment.
-            See Formating Specification Mini-Language for more information
-                https://docs.python.org/3/library/string.html#formatspec
-
-            | Option | Meaning                                                |
-            |   '<'  | Forces the field to be left-aligned within the         |
-            |        | available space (this is the default for most objects) |
-            |   '>'  | Forces the field to be right-aligned within the        |
-            |        | available space (this is the default for numbers).     |
-            |   '='  | Forces the padding to be placed after the sign (if any)|
-            |        | but before the digits. This is used for printing       |
-            |        | fields in the form ‘+000000120’. This alignment option |
-            |        | is only valid for numeric types. It becomes the default|
-            |        | when ‘0’ immediately precedes the field width.         |
-            |   '^'  | Forces the field to be centered within the available   |
-            |        | space.                                                 |
-        suffix: The value to append to the message
+        | Option | Meaning                                                |
+        |   '<'  | Forces the field to be left-aligned within the         |
+        |        | available space (this is the default for most objects) |
+        |   '>'  | Forces the field to be right-aligned within the        |
+        |        | available space (this is the default for numbers).     |
+        |   '='  | Forces the padding to be placed after the sign (if any)|
+        |        | but before the digits. This is used for printing       |
+        |        | fields in the form ‘+000000120’. This alignment option |
+        |        | is only valid for numeric types. It becomes the default|
+        |        | when ‘0’ immediately precedes the field width.         |
+        |   '^'  | Forces the field to be centered within the available   |
+        |        | space.                                                 |
+    suffix: The value to append to the message
 '''
 
 
@@ -135,7 +135,7 @@ from .formatters.loggingtableformatter import LoggerTableFormatter
 from .formatters.htmltableformatter import HtmlTableFormatter
 
 # Utility Classes
-from .register_formatter import register_formatter
+from .register_formatter import register_formatter, get_formatter_names
 from .create_formatter import create_formatter, create_formatters
 from .tabledataprovider import TableFormatterDataProvider
 from .tableformatter import TableFormatter

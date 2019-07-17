@@ -1,13 +1,14 @@
 # table_formatters/__main__.py
 
+from argparse import ArgumentParser
 import logging
 
 from .formatters.compositetableformatter import CompositeTableFormatter
 from .create_formatter import create_formatters
 from .tabledataprovider import TableFormatterDataProvider
+from .register_formatter import get_formatter_names
 
 def main():
-
     class Person(TableFormatterDataProvider):
         def __init__(self, name, address, phone_number):
             self.name = name
@@ -26,11 +27,11 @@ def main():
             # Note: order of the list is important
             return ['Name', 'Address', 'Phone Number']
 
-    logger = logging.getLogger('LoggerTableFormatter')
+    logger = logging.getLogger(__name__)
 
     formatter = create_formatters(
         formatters='logging;csv',
-        logger=logging.getLogger('LoggerTableFormatter'),
+        logger=logger,
         log_level=logging.DEBUG,
         filename='foo.csv',
         column_widths=('12<', '50<', '12<', '12<', '12<')
@@ -47,9 +48,22 @@ def main():
             total += 1
         formatter.footer('Total', ' ', total)
 
+def print_formatter_names():
+    print('Available table formatters:')
+
+    for name in get_formatter_names():
+        print(' '*3, name)
 
 if __name__ == '__main__':
-
     logging.basicConfig(level=logging.DEBUG)
+
+    parser = ArgumentParser()
+    parser.add_argument('--names', action='store_true',
+        help='Lists all available table formatters')
+    args = parser.parse_args()
+
+    if args.names:
+        print_formatter_names()
+        exit(0)
 
     main()
