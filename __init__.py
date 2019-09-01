@@ -133,6 +133,7 @@ from .formatters.streamtableformatter import StreamTableFormatter
 from .formatters.csvtableformatter import CSVTableFormatter
 from .formatters.loggingtableformatter import LoggerTableFormatter
 from .formatters.htmltableformatter import HtmlTableFormatter
+from .formatters.nonetableformatter import NoneTableFormatter
 
 # Utility Classes
 from .register_formatter import register_formatter, get_formatter_names
