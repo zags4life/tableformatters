@@ -39,11 +39,18 @@ class TableFormatter(ABC):
     def __init__(self, column_widths=None, header_widths=None, footer_widths=None,
             display_options='headers;footers;rows', **kwargs):
 
-        self.column_widths = [ColumnWidth(cw) for cw in column_widths] if column_widths else column_widths
-        self.header_widths = [ColumnWidth(cw) for cw in header_widths] \
-            if header_widths else self.column_widths
-        self.footer_widths = [ColumnWidth(cw) for cw in footer_widths] \
-            if footer_widths else self.column_widths
+        self.column_widths = column_widths
+        self.header_widths = header_widths
+        self.footer_widths = footer_widths
+
+        if self.column_widths:
+            self.column_widths = [ColumnWidth(cw) for cw in self.column_widths]
+
+        if self.header_widths:
+            self.header_widths = [ColumnWidth(cw) for cw in self.header_widths]
+
+        if self.footer_widths:
+            self.footer_widths = [ColumnWidth(cw) for cw in self.footer_widths]
 
         self.display_options = []
         for option in re.split(',|;|\.| ', display_options.lower()):

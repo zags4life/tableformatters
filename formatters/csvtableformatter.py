@@ -5,10 +5,8 @@ from ..tableformatter import TableFormatter
 
 @register_formatter('csv')
 class CSVTableFormatter(TableFormatter):
-    def __init__(self, filename=None, **kwargs):
-        kwargs.pop('column_widths', None)
-        kwargs.pop('header_widths', None)
-
+    def __init__(self, filename=None, column_widths=None, header_widths=None,
+            footer_widths=None, **kwargs):
         super().__init__(**kwargs)
         self.filename = filename
         self.stream = None

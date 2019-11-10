@@ -50,8 +50,8 @@ class ColumnWidth(object):
         self.width -= len(self.prefix)
 
     def __str__(self):
-        return "Prefix='{0.prefix}', Width={0.width}, Precision={0.precision}, Alignment={0.alignment}, " \
-            " Suffix='{0.suffix}'".format(self)
+        return f"Prefix='{self.prefix}', Width={self.width}, Precision=" \
+            f"{self.precision}, Alignment={self.alignment}, Suffix='{self.suffix}'"
 
     def __repr__(self):
         return 'ColumnWidth({})'.format(str(self))
