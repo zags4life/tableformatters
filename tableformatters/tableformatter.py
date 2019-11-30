@@ -48,9 +48,13 @@ class TableFormatter(ABC):
 
         if self.header_widths:
             self.header_widths = [ColumnWidth(cw) for cw in self.header_widths]
+        else:
+            self.header_widths = self.column_widths
 
         if self.footer_widths:
             self.footer_widths = [ColumnWidth(cw) for cw in self.footer_widths]
+        else:
+            self.footer_widths = self.column_widths
 
         self.display_options = []
         for option in re.split(',|;|\.| ', display_options.lower()):
@@ -121,6 +125,7 @@ class TableFormatter(ABC):
             return [str(d) for d in dataset]
 
         return [cw.format(d, resize) for cw, d in zip(column_widths, dataset)]
+
 
 class StringTableFormatter(TableFormatter):
     @abstractproperty
