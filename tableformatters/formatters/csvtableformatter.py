@@ -10,6 +10,19 @@ class CSVTableFormatter(TableFormatter):
         super().__init__(**kwargs)
         self.filename = filename
         self.stream = None
+        
+    def __enter__(self):
+        if self.filename:
+            self.stream = open(self.filename, 'w')
+        return self
+
+    def __exit__(self, type, value, traceback):
+        if self.stream:
+            self.stream.close()
+
+    ##########################################################
+    # TableFormatter ABC Implementation
+    ##########################################################
 
     def header(self, data):
         '''Writes the header to the csv file'''
@@ -30,18 +43,14 @@ class CSVTableFormatter(TableFormatter):
 
         self.__print_formatted(footer)
 
+    
+    ##########################################################
+    # "Private" methods
+    ##########################################################
+
     def __print_formatted(self, data):
         # First ensure there are no commas in the data
 
         enriched_data = [str(d) if ',' not in str(d) else '"{}"'.format(d) for d in data]
 
         self.stream.write('{}\n'.format(','.join(enriched_data)))
-
-    def __enter__(self):
-        if self.filename:
-            self.stream = open(self.filename, 'w')
-        return self
-
-    def __exit__(self, type, value, traceback):
-        if self.stream:
-            self.stream.close()

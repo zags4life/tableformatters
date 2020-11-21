@@ -106,12 +106,11 @@ class TableFormatter(ABC):
             # Yield to the caller
             yield data
 
-
     ##########################################################
     # with statement support implementation
     ##########################################################
     def __enter__(self):
-        pass
+        return self
 
     def __exit__(self, type, value, traceback):
         pass

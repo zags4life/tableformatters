@@ -5,6 +5,11 @@ from ..tableformatter import TableFormatter
 
 @register_formatter('none')
 class NoneTableFormatter(TableFormatter):
+    
+    ##########################################################
+    # TableFormatter ABC Implementation
+    ##########################################################
+
     def header(self, data):
         pass
 

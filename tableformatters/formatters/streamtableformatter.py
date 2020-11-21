@@ -25,6 +25,10 @@ class StreamTableFormatter(TableFormatter):
         self.__stream = output_stream
         self.__msg_length = None
         
+    ##########################################################
+    # TableFormatter ABC Implementation
+    ##########################################################
+
     def header(self, data):
         '''Displays the header to the console'''
         if not super().header(data):
@@ -56,6 +60,10 @@ class StreamTableFormatter(TableFormatter):
         # Print the row values
         self.__print_formatted(rowdata.row_values, self.column_widths)
 
+    ##########################################################
+    # Helper Methods
+    ##########################################################
+    
     def __print_formatted(self, data, column_widths):
         '''Prints the data to the console'''
         # Format the msg using the provided column widths

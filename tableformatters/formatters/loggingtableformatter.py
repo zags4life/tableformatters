@@ -12,6 +12,10 @@ class LoggerTableFormatter(TableFormatter):
         super().__init__(**kwargs)
         self.__func = self.__get_logging_func(logger, log_level)
 
+    ##########################################################
+    # TableFormatter ABC Implementation
+    ##########################################################
+
     def header(self, data):
         if not super().header(data):
             return
@@ -28,14 +32,19 @@ class LoggerTableFormatter(TableFormatter):
             return
         self.__func(' '.join(self._format_msg(values, self.column_widths)))
 
-    @classmethod
-    def __get_logging_func(self, logger, log_level):
-        if log_level == logging.ERROR or log_level == 'error':
-            return logger.error
-        if log_level == logging.WARNING or log_level == 'warning':
-            return logger.warning
-        if log_level == logging.INFO or log_level == 'info':
-            return logger.info
-        if log_level == logging.DEBUG or log_level == 'debug':
-            return logger.debug
-        raise AssertionError("Unknown log_level '{}'".format(log_level))
+    ##########################################################
+    # Helper Methods
+    ##########################################################
+
+    @staticmethod
+    def __get_logging_func(logger, log_level):
+        '''Gets the cooresponding logger function bases on the log level
+        
+        Parameters:
+            logger - an instance of LoggerTableFormatter
+            log_level - the log level 
+        '''
+        if isinstance(log_level, str):
+            log_level = getattr(logging, log_level.upper())
+        
+        return getattr(logger, log_level)

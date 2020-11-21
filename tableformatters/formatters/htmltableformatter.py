@@ -104,8 +104,8 @@ class HtmlTableFormatter(StringTableFormatter):
         output.append(self.__spacer * 2 + '</tr>')
         return output
 
-    @classmethod
-    def __get_style(cls, column_width):
+    @staticmethod
+    def __get_style(column_width):
         attrs = []
 
         attrs.append('width: {}px'.format(column_width.width))
